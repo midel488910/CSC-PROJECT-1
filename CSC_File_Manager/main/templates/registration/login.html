@@ -1,0 +1,34 @@
+{% extends "main/base.html" %} {% load static %}
+<style>
+    main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+    }
+</style>
+
+{% block title %}LOGIN PAGE{% endblock  %}
+{% load crispy_forms_tags %}
+{% block content %} 
+    
+
+ 
+    <div class="d-flex flex-column w-100 justify-content-center align-items-center">
+        <form method="POST">
+            
+            {% csrf_token %}{{form|crispy}} 
+            
+             
+        
+            <p>Don't have an account? Create one <a href="/register">here</a></p>
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

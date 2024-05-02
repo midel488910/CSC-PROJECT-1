@@ -1,0 +1,31 @@
+{% extends "main/base.html" %} {% load static %}
+<style>
+    main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+    }
+</style>
+
+{% block title %}CREATE PAGE{% endblock  %}
+{% load crispy_forms_tags %}
+{% block content %} 
+    
+
+ 
+    <div class="d-flex flex-column w-100 justify-content-center align-items-center">
+        <form method="POST" enctype="multipart/form-data">
+            
+            {% csrf_token %}{{form|crispy}} 
+            
+            <button type="submit" class="btn btn-success">Post</button>
+        </form>
+    </div>
+
+
+
+
+{% endblock %}
