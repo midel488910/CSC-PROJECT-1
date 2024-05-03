@@ -13,7 +13,7 @@ class RegisterForm(UserCreationForm):
 
 
 class PostForm(forms.ModelForm):
-    #file = forms.FileField()
+    file = forms.FileField()
     class Meta:
         model = Post
         fields = ['title','description']
