@@ -13,5 +13,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title + "\n" + self.description
     
-
+class Dog(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.FileField(upload_to = 'dogs/')
 

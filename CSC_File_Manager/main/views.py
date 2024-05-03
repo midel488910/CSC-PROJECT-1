@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import RegisterForm, PostForm
+from .forms import RegisterForm, PostForm, DogForm
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Post
+from .models import Post, Dog
 
 # Create your views here.
 
@@ -53,4 +53,14 @@ def create_post(request):
     else:
         form = PostForm()
     return render (request,'main/create_post.html',{'form':form})
+
+def upload_form(request):
+    if request.method == "POST":
+        form = DogForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            form = DogForm()
+    return render(request, 'main/upload-exp.html', {'form':form})
+
 
