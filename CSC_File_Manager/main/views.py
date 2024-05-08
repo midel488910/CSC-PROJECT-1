@@ -68,14 +68,15 @@ def upload_pdf(request):
         form = CaseForm()
     return render(request,'main/upload_pdf.html',{'form':form})
 #PDFView(generic.TemplateView):
+@login_required(login_url="/login")   
 def PDFView(request):
-    # model = CaseFile
-    # template_name = 'display_pdf.html'
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["pdfFiles"] = CaseFile.objects.all()
-    #     return context
     pdf_files = CaseFile.objects.all()
+    if request.method == "POST":
+        pdf_id = request.POST.get('pdf-id')
+        pdf = CaseFile.objects.get(id=pdf_id)
+        if pdf and (request.user.has_perm("main.delete_post")):
+            pdf.delete()
+    
     return render(request, "main/display_pdf.html",{"pdf_files":pdf_files})
     
 
