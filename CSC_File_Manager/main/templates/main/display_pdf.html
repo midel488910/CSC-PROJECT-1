@@ -1,0 +1,45 @@
+{% extends "main/base.html" %} {% load static %}
+<style>
+    main {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+    }
+</style>
+
+{% block title %}IFRAME TEST{% endblock  %}
+{% load crispy_forms_tags %}
+{% block content %} 
+    
+
+<h1>PDFS</h1>
+{% for pdf_file in pdf_files %}
+<div class="card mt-2">
+    <div class="card-header"> <strong> @{{pdf_file.title}} </strong> </div>
+    <div class="card-body d-flex flex-row justify-content-between">
+        <div>
+            <h5 class="card-title"> {{post.title}} </h5>
+            <a target="_blank" href="{{ pdf_file.filePdf.url }}" >{{ pdf_file.title }}</a>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        {{pdf_file.created_at}}
+    </div>
+</div>
+{%empty%}
+<p>No post yet</p>
+{% endfor %}
+
+{% comment %}  
+    <ul>
+        {% for pdf_file in pdf_files %}
+            <li><a target="_blank" href="{{ pdf_file.filePdf.url }}" >{{ pdf_file.title }}</a></li>
+        {% endfor %}
+    </ul> {% endcomment %}
+
+
+
+{% endblock %}

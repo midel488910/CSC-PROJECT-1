@@ -2,9 +2,12 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import RegisterForm, PostForm
+from .forms import RegisterForm, PostForm, CaseForm
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Post
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from .models import Post, CaseFile
+from django.views import generic
+
 
 # Create your views here.
 
@@ -55,7 +58,26 @@ def create_post(request):
     return render (request,'main/create_post.html',{'form':form})
 
 
-
+def upload_pdf(request):
+    if request.method == "POST":
+        form = CaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('Home')
+    else:
+        form = CaseForm()
+    return render(request,'main/upload_pdf.html',{'form':form})
+#PDFView(generic.TemplateView):
+def PDFView(request):
+    # model = CaseFile
+    # template_name = 'display_pdf.html'
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["pdfFiles"] = CaseFile.objects.all()
+    #     return context
+    pdf_files = CaseFile.objects.all()
+    return render(request, "main/display_pdf.html",{"pdf_files":pdf_files})
+    
 
  
 
