@@ -62,6 +62,8 @@ def upload_pdf(request):
     if request.method == "POST":
         form = CaseForm(request.POST, request.FILES)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
             form.save()
             return redirect('Home')
     else:

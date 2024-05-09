@@ -18,10 +18,12 @@
 <h1>PDFS</h1>
 {% for pdf_file in pdf_files %}
 <div class="card mt-2">
-    <div class="card-header"> <strong> {{pdf_file.title}} </strong> </div>
+    <div class="card-header"> <strong> <h3>{{pdf_file.title}}</h3> </strong> </div>
     <div class="card-body d-flex flex-row justify-content-between">
         <div>
-            <h5 class="card-title"> {{pdf_file.title}} </h5>
+            <h5 class="card-title"> Docket No: {{pdf_file.docket_number}} </h5>
+            <h5 class="card-title"> Date of Decision: {{pdf_file.date_of_decision}} </h5>
+            <h5 class="card-title"> Respondents: {{pdf_file.respondents}} </h5>
             <a target="_blank" href="{{ pdf_file.filePdf.url }}" >File-Link</a>
         </div>
         <div>

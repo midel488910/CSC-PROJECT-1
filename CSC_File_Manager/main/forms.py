@@ -22,7 +22,10 @@ class PostForm(forms.ModelForm):
 class CaseForm(forms.ModelForm):
     class Meta:
         model = CaseFile
-        fields = ['title','filePdf']
+        widgets = {
+            'date_of_decision': forms.DateInput(attrs={'type': 'date'})
+        }
+        fields = ('title','docket_number','filePdf','date_of_decision','respondents','remarks')
 
 
 
