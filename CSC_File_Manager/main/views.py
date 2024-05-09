@@ -2,9 +2,12 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import RegisterForm, PostForm
+from .forms import RegisterForm, PostForm, CaseForm
 from django.contrib.auth.decorators import login_required, permission_required
-from .models import Post
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from .models import Post, CaseFile
+from django.views import generic
+
 
 # Create your views here.
 
@@ -53,4 +56,31 @@ def create_post(request):
     else:
         form = PostForm()
     return render (request,'main/create_post.html',{'form':form})
+
+
+def upload_pdf(request):
+    if request.method == "POST":
+        form = CaseForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
+            form.save()
+            return redirect('Home')
+    else:
+        form = CaseForm()
+    return render(request,'main/upload_pdf.html',{'form':form})
+#PDFView(generic.TemplateView):
+@login_required(login_url="/login")   
+def PDFView(request):
+    pdf_files = CaseFile.objects.all()
+    if request.method == "POST":
+        pdf_id = request.POST.get('pdf-id')
+        pdf = CaseFile.objects.get(id=pdf_id)
+        if pdf and (request.user.has_perm("main.delete_post")):
+            pdf.delete()
+    
+    return render(request, "main/display_pdf.html",{"pdf_files":pdf_files})
+    
+
+ 
 

@@ -8,7 +8,10 @@ urlpatterns = [
     path('Register/',views.SignUp, name="Signup"),
     path('register/',views.SignUp, name="Signup"),
     path('logout/',views.logout_view, name="logout"),
-    path('create-post',views.create_post, name="create"),
+    path('create-post/',views.create_post, name="create"),
+    path('upload-post/',views.upload_pdf, name="upload"),
+    path('pdf/',views.PDFView, name="upload"),   
+    
 
 ]
 
