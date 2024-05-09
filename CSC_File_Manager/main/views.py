@@ -14,16 +14,16 @@ from django.views import generic
 def Base(request):
     return render(request,"main/base.html")
 
-@login_required(login_url="/login")
-def Home(request):
-    posts = Post.objects.all()
-    if request.method == "POST":
-        post_id = request.POST.get('post-id')
-        post = Post.objects.get(id=post_id)
-        if post and (post.author == request.user or request.user.has_perm("main.delete_post")):
-            post.delete()
+# @login_required(login_url="/login")
+# def Home(request):
+#     posts = Post.objects.all()
+#     if request.method == "POST":
+#         post_id = request.POST.get('post-id')
+#         post = Post.objects.get(id=post_id)
+#         if post and (post.author == request.user or request.user.has_perm("main.delete_post")):
+#             post.delete()
 
-    return render(request,"main/home.html",{'posts':posts})
+#     return render(request,"main/home.html",{'posts':posts})
 
 def SignUp(request):
     if request.method == 'POST':
@@ -43,21 +43,22 @@ def logout_view(request):
     return redirect('login')
 
 
+# @login_required(login_url="/login")   
+# @permission_required('main.add_post',login_url="/login",raise_exception=True)
+# def create_post(request):
+#     if request.method == "POST":
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.author = request.name
+#             post.save()
+#             return redirect('Home')
+#     else:
+#         form = PostForm()
+#     return render (request,'main/create_post.html',{'form':form})
+
 @login_required(login_url="/login")   
 @permission_required('main.add_post',login_url="/login",raise_exception=True)
-def create_post(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('Home')
-    else:
-        form = PostForm()
-    return render (request,'main/create_post.html',{'form':form})
-
-
 def upload_pdf(request):
     if request.method == "POST":
         form = CaseForm(request.POST, request.FILES)
@@ -79,7 +80,7 @@ def PDFView(request):
         if pdf and (request.user.has_perm("main.delete_post")):
             pdf.delete()
     
-    return render(request, "main/display_pdf.html",{"pdf_files":pdf_files})
+    return render(request, "main/home.html",{"pdf_files":pdf_files})
     
 
  
