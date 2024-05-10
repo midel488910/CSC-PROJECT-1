@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CaseFile,Post
+from .models import CaseFile
 # Register your models here.
-admin.site.register(Post)
+
 admin.site.register(CaseFile)

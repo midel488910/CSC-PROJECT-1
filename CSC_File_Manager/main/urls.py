@@ -9,6 +9,7 @@ urlpatterns = [
     path('register/',views.SignUp, name="Signup"),
     path('logout/',views.logout_view, name="logout"),
     path('create-post/',views.upload_pdf, name="create"),
+    path('search/', views.search_view, name='search_view'),
     #path('upload-post/',views.upload_pdf, name="upload"),
     #path('pdf/',views.PDFView, name="upload"),   
     
