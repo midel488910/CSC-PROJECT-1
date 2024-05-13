@@ -7,6 +7,7 @@ from django.core.validators import FileExtensionValidator
 
 #validator that accepts only pdf files
 ext_validator = FileExtensionValidator(["pdf"])
+
 #################
 # def validate_file_mimetype(file):
 #     accept = ['application/pdf']

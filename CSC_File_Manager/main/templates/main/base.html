@@ -27,6 +27,7 @@
                 <a class="nav-link active" aria-current="page" href="../home/">Home</a>
               </li>
               <li class="nav-item">
+                {% comment %} Disable Create nav item if user does not have permission {% endcomment %}
                 {%if perms.main.add_post %}
                   <a class="nav-link enabled" href="/create-post">Create</a>
                 {% else %}
@@ -37,6 +38,7 @@
                 
             </ul>
             <ul class="navbar-nav d-flex">
+              {% comment %} Display user {% endcomment %}
               {% if user.is_authenticated %}
               <span class="navbar-text">Logged in as {{user.username}}|</span>
               <li class="nav-item">

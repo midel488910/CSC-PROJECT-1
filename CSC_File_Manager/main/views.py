@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import RegisterForm, SearchForm, CaseForm
+from .forms import RegisterForm, CaseForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from .models import CaseFile

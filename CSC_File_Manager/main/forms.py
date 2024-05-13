@@ -12,7 +12,7 @@ class RegisterForm(UserCreationForm):
         #arrangement in the website 
         fields = ["username","first_name", "last_name" ,"email", "password1","password2"]
 
-
+# For inputs for the case page
 class CaseForm(forms.ModelForm):
     class Meta:
         model = CaseFile
@@ -23,8 +23,4 @@ class CaseForm(forms.ModelForm):
             'filePdf': forms.FileInput(attrs={'accept': '.pdf'})
         }
         
-
-
-class SearchForm(forms.Form):
-    query = forms.CharField(max_length=100, label='Search')
 
