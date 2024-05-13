@@ -22,10 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('main.urls')),
-    path('',include("django.contrib.auth.urls")),
-    # path("register/",v.register,name="Register"),
-    # path("",include('myApp.urls')),
+    path('',include('main.urls')), #includes all urls in the django project
+    path('',include("django.contrib.auth.urls")), #for django auth users
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

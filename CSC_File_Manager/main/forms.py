@@ -1,31 +1,26 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Post, CaseFile
+from .models import CaseFile
 
 
-
+#display forms for registration since Django already set up users reg and auth
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=False)
     class Meta:
         model = User
-        fields = ["username", "email", "password1","password2"]
+        #arrangement in the website 
+        fields = ["username","first_name", "last_name" ,"email", "password1","password2"]
 
-
-class PostForm(forms.ModelForm):
-    
-    class Meta:
-        model = Post
-        fields = ['title','description']
-
-
+# For inputs for the case page
 class CaseForm(forms.ModelForm):
     class Meta:
         model = CaseFile
-        widgets = {
-            'date_of_decision': forms.DateInput(attrs={'type': 'date'})
-        }
         fields = ('title','docket_number','filePdf','date_of_decision','respondents','remarks')
-
-
+        #widgets for input to be in their specific type (date type) and only accepts PDF file
+        widgets = {
+            'date_of_decision': forms.DateInput(attrs={'type': 'date'}),
+            'filePdf': forms.FileInput(attrs={'accept': '.pdf'})
+        }
+        
 
